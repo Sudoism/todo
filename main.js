@@ -1,0 +1,1 @@
+(()=>{"use strict";const t=("title","A description","date","high",{getTitle:()=>"title",getDescription:()=>"A description",getDueDate:()=>"date",getPriority:()=>"high",getStatus:()=>!1});console.log(t.getDescription()),console.log(t.getTitle())})();
