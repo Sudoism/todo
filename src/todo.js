@@ -14,8 +14,8 @@ const todoList = (function(){
     const addTodo = (todo) => {
         list.push(todo);
     }
-    const getTodo = () => list;
-    return {getTodo, addTodo};
+    const getTodoList = () => list;
+    return {getTodoList, addTodo};
 })()
 
 export {todo, todoList};

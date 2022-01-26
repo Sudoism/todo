@@ -6,6 +6,6 @@ todoList.addTodo(note);
 
 console.log(note.getDescription());
 console.log(note.getTitle());
-console.log(todoList.getTodo());
+console.log(todoList.getTodoList());
 
-displayController.paintPage();
+displayController.paintPage(todoList);
