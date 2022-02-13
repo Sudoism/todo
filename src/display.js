@@ -1,10 +1,11 @@
+
 const displayController = (function() {
     const content = document.getElementById("content")
 
     function paintPage(todoList) {
         const addNewTodo = document.createElement("button");
-        addNewTodo.innerText = "Hi"
-        addNewTodo.classList.add("bg-blue-200")
+        addNewTodo.innerText = "+";
+        addNewTodo.classList.add('bg-blue-500', 'hover:bg-blue-700', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
         content.appendChild(addNewTodo);
 
         const todoListDisplay = document.createElement("div");
