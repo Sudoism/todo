@@ -3,7 +3,8 @@ const displayController = (function() {
 
     function paintPage(todoList) {
         const addNewTodo = document.createElement("button");
-        addNewTodo.innerText = "+"
+        addNewTodo.innerText = "Hi"
+        addNewTodo.classList.add("bg-blue-200")
         content.appendChild(addNewTodo);
 
         const todoListDisplay = document.createElement("div");
