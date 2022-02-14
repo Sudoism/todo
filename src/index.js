@@ -2,6 +2,17 @@ import {todo, todoList} from './todo';
 import {displayController} from './display';
 import './style.css';
 
+const addTodoButton = document.getElementById("addTodo");
+const addTodoDialog = document.getElementById('todoDialog');
+
+addTodoButton.addEventListener('click', function onOpen() {
+    if (typeof addTodoDialog.showModal === "function") {
+        addTodoDialog.showModal();
+    } else {
+      alert("The <dialog> API is not supported by this browser");
+    }
+  });
+
 const note = todo("title", "A description", "date", "high");
 todoList.addTodo(note);
 
