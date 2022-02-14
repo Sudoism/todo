@@ -1,6 +1,7 @@
 
 const displayController = (function() {
-    const content = document.getElementById("content")
+    const content = document.getElementById("content");
+    content.classList.add('grid', 'grid-cols-[1fr_4fr]', 'gap-10');
 
     function paintPage(todoList) {
         const addNewTodo = document.createElement("button");
@@ -10,6 +11,7 @@ const displayController = (function() {
 
         const todoListDisplay = document.createElement("div");
         todoListDisplay.setAttribute("id", "todoList");
+        todoListDisplay.classList.add('grid' ,'gap-5');
         content.appendChild(todoListDisplay);
 
         for(let i= 0; i < todoList.length; i++ ) {
@@ -17,8 +19,14 @@ const displayController = (function() {
             let description = todo.getDescription();
             let newNode = document.createElement("div");
             newNode.innerText = description;
-            content.appendChild(newNode);
+            todoListDisplay.appendChild(newNode);
         }
+    }
+
+    function addTodoDialog() {
+        const todoDialog = document.createElement("dialog");
+        todoDialog.setAttribute("id", "todoDialog");
+
     }
 
     return {paintPage}

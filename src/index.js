@@ -16,5 +16,4 @@ console.log(note.getTitle());
 console.log(todoList.getTodoList());
 console.log(todoList.getTodoList().length);
 
-displayController.paintPage(todoList.getTodoList());
 
