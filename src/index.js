@@ -7,14 +7,14 @@ const addTodoDialog = document.getElementById('todoDialog');
 
 addTodoButton.addEventListener('click', function onOpen() {
     if (typeof addTodoDialog.showModal === "function") {
-        addTodoDialog.showModal();
+        //addTodoDialog.showModal();
+        let note = todo("title", "A new description", "date", "high");
+        todoList.addTodo(note);
+        displayController.addTodo(note);
     } else {
       alert("The <dialog> API is not supported by this browser");
     }
-  });
-
-const note = todo("title", "A description", "date", "high");
-todoList.addTodo(note);
+});
 
 const newNote = todo("title", "A description again", "date", "high");
 todoList.addTodo(newNote);
