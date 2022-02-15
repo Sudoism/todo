@@ -16,7 +16,7 @@ const displayController = (function() {
         let newTodoButton = document.createElement("button");
         newTodoButton.innerText = "Done";
         newTodoButton.id = id;
-        newTodoButton.classList.add('new-todo-btn','bg-cyan-500', 'hover:bg-cyan-700', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded-full', 'justify-self-start', 'm-4')
+        newTodoButton.classList.add('done-button','bg-cyan-500', 'hover:bg-cyan-700', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded-full', 'justify-self-start', 'm-4')
         newTodoContainer.appendChild(newTodoButton);
 
         let newTodoTitle = document.createElement("div");
@@ -31,7 +31,7 @@ const displayController = (function() {
 
         let newTodoEditButton = document.createElement("button");
         newTodoEditButton.innerText = "Edit";
-        newTodoEditButton.classList.add('bg-cyan-500', 'hover:bg-cyan-700', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded-full', 'justify-self-end', 'm-4')
+        newTodoEditButton.classList.add('edit-button', 'bg-cyan-500', 'hover:bg-cyan-700', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded-full', 'justify-self-end', 'm-4')
         newTodoContainer.appendChild(newTodoEditButton);
 
         list.appendChild(newTodoContainer);

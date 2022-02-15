@@ -8,6 +8,9 @@ const addTodoDialog = document.getElementById('todoDialog');
 const todoTitleInput = document.getElementById('todoTitleInput');
 const todoDescriptionInput = document.getElementById('todoDescriptionInput')
 
+const editTodoDialog = document.getElementById('editTodoDialog');
+const editTodoDialogTitle = document.getElementById('editTodoTitleInput');
+
 
 //Start initialization
 const currentTodoList = todoListCreate("inbox")
@@ -45,18 +48,20 @@ addTodoButton.addEventListener('click', function onOpen() {
 confirmAddTodoButton.addEventListener('click', () => {
     let newNote = todo(todoTitleInput.value, todoDescriptionInput.value, "date", "high");
     currentTodoList.addTodo(newNote);
+    todoTitleInput.value = '';
     renderTodoList();
 });
 
 function renderTodoList() {
     displayController.updateTodoList(currentTodoList.getTodoList());
     addDoneLogic()
+    addEditLogic()
 }
 
 
 //funciton to populate todoButtons
 function addDoneLogic() {
-    let elem = document.getElementsByClassName("new-todo-btn");
+    let elem = document.getElementsByClassName("done-button");
 
     for(let i = 0; i < elem.length; i++) {
         elem[i].addEventListener('click', (event) => {
@@ -66,8 +71,39 @@ function addDoneLogic() {
     }
 }
 
+function addEditLogic() {
+    let elem = document.getElementsByClassName("edit-button");
+
+    for(let i = 0; i < elem.length; i++) {
+        elem[i].addEventListener('click', (event) => {
+            if (typeof editTodoDialog.showModal === "function") {
+                let array = currentTodoList.getTodoList()
+                editTodoDialogTitle.value = array[i].getTitle()
+                editTodoDialog.showModal();
+                //let note = todo("title", "A new description", "date", "high");
+              //  todoList.addTodo(note);
+               // displayController.addTodo(note);
+            } else {
+              alert("The <dialog> API is not supported by this browser");
+            }
+            //editTodoDialog
+            //currentTodoList.removeTodo(event.target.id);
+            //renderTodoList();
+        });
+    }
+}
 
 
+addTodoButton.addEventListener('click', function onOpen() {
+    if (typeof addTodoDialog.showModal === "function") {
+        addTodoDialog.showModal();
+        //let note = todo("title", "A new description", "date", "high");
+      //  todoList.addTodo(note);
+       // displayController.addTodo(note);
+    } else {
+      alert("The <dialog> API is not supported by this browser");
+    }
+});
 
 
 
