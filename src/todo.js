@@ -11,11 +11,37 @@ const todo = (title, description, dueDate, priority, context) => {
 
 const todoList = (function(){
     let list = [];
+
     const addTodo = (todo) => {
         list.push(todo);
     }
+
+    const removeTodo = (index) => {
+        list.splice(index,1);
+    }
+
     const getTodoList = () => list;
-    return {getTodoList, addTodo};
+
+    return {getTodoList, addTodo, removeTodo};
 })()
 
-export {todo, todoList};
+const todoListCreate = (todoListName) => {
+    let list = [];
+    let listName = todoListName;
+
+    const getName = () => listName;
+
+    const addTodo = (todo) => {
+        list.push(todo);
+    }
+
+    const removeTodo = (index) => {
+        list.splice(index,1);
+    }
+
+    const getTodoList = () => list;
+
+    return {getName, getTodoList, addTodo, removeTodo}
+}
+
+export {todo, todoList, todoListCreate};
