@@ -9,6 +9,26 @@ const todoTitleInput = document.getElementById('todoTitleInput');
 const todoDescriptionInput = document.getElementById('todoDescriptionInput')
 
 
+//Start initialization
+const currentTodoList = todoListCreate("inbox")
+
+//Test entries
+const newNote = todo("A title", "A description again", "date", "high");
+currentTodoList.addTodo(newNote);
+const newNote2 = todo("A second title", "A description once again again", "date", "high");
+currentTodoList.addTodo(newNote2);
+const newNote3 = todo("A second title", "A description once again again", "date", "high");
+currentTodoList.addTodo(newNote3);
+const newNote4 = todo("A second title", "A description once again again", "date", "high");
+currentTodoList.addTodo(newNote4);
+
+//update page and make dynamic
+//displayController.updateTodoList(currentTodoList.getTodoList());
+//addDoneLogic();
+renderTodoList();
+
+
+//dialog connected to + button
 addTodoButton.addEventListener('click', function onOpen() {
     if (typeof addTodoDialog.showModal === "function") {
         addTodoDialog.showModal();
@@ -20,24 +40,32 @@ addTodoButton.addEventListener('click', function onOpen() {
     }
 });
 
-//need to dynamically populate the button logics? 
 
-const inboxTodoList = todoListCreate("inbox")
-
-const newNote = todo("A title", "A description again", "date", "high");
-inboxTodoList.addTodo(newNote);
-
-const newNote2 = todo("A second title", "A description once again again", "date", "high");
-inboxTodoList.addTodo(newNote2);
-
-displayController.updateTodoList(inboxTodoList.getTodoList());
-
+//confirm in dialog action
 confirmAddTodoButton.addEventListener('click', () => {
-
-    displayController.updateTodoList(todoList.getTodoList());
     let newNote = todo(todoTitleInput.value, todoDescriptionInput.value, "date", "high");
-    displayController.addTodo(newNote);
+    currentTodoList.addTodo(newNote);
+    renderTodoList();
 });
+
+function renderTodoList() {
+    displayController.updateTodoList(currentTodoList.getTodoList());
+    addDoneLogic()
+}
+
+
+//funciton to populate todoButtons
+function addDoneLogic() {
+    let elem = document.getElementsByClassName("new-todo-btn");
+
+    for(let i = 0; i < elem.length; i++) {
+        elem[i].addEventListener('click', (event) => {
+            currentTodoList.removeTodo(event.target.id);
+            renderTodoList();
+        });
+    }
+}
+
 
 
 
