@@ -18,8 +18,7 @@
 
         <div class="col-start-2 grid bg-cyan-300 content-start text-cyan-100 font-bold">
             <div class="p-3 text-2xl bg-cyan-500 grid grid-flow-col justify-items-center justify-evenly">
-                <div id="projectLabel" class="self-center">Inbox</div>
-                <div class="self-center">Sort</div>
+                <div id="contextLabel" class="self-center">Inbox</div>
             </div>
 
             <div id="list" class=" grid grid-flow-row content-start rounded divide-y-2 divide-cyan-800">
@@ -27,25 +26,25 @@
         </div>
 
 
-        <dialog id="todoDialog">
+        <dialog id="todoDialog" class="bg-cyan-600 rounded">
             <form method="dialog">
-              <p>
-                <input type="text" id="todoTitleInput">
-              </p>
-              <p>
-                <input type="text" placeholder="Description" id="todoDescriptionInput">
-              </p>
-              <p>
-                <label for="">Due Date</label> <!-- TODO consume date from dialog -->
-                <input type="date">
-              </p>
+                <div class="grid grid-cols-2 grid-rows-4 gap-2">
+                    <label for="todoTitleInput" class="text-cyan-100 font-bold text-xl">Title:</label> 
+                    <input type="text" id="todoTitleInput" class="bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
 
-              <menu>
-                <button value="cancel">Cancel</button>
-                <button id="confirmButton" value="default">Confirm</button>
-              </menu>
+                    <label for="todoDescriptionInput" class="text-cyan-100 font-bold text-xl">Description: </label> 
+                    <input type="text" id="todoDescriptionInput" class="bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
+
+                    <label for="todoDateInput" class="text-cyan-100 font-bold text-xl">Due Date: </label> 
+                    <input type="date" id="todoDateInput" class="bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
+
+                    <div class="col-span-2 flex justify-evenly">
+                        <button value="cancel" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full w-24">Cancel</button>
+                        <button id="confirmButton" value="default" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full w-24">Confirm</button>
+                    </div>
+                </div>
             </form>
-          </dialog>
+        </dialog>
 
 
           <dialog id="editTodoDialog">
@@ -53,12 +52,20 @@
               <p>
                 <input type="text" id="editTodoTitleInput">
               </p>
+              <p>
+                <input type="text" id="editTodoDescriptionInput">
+              </p>
+              <p>
+                <label for="">Due Date</label> 
+                <input type="date" id="editTodoDateInput">
+              </p>
   
               <menu>
                 <button value="cancelEditButton">Cancel</button>
                 <button id="confirmEditButton" value="default">Confirm</button>
               </menu>
             </form>
+            <div id="indexOfTodo" class="hidden"></div>
           </dialog>
           
     </div>

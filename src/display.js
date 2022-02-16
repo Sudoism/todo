@@ -26,7 +26,7 @@ const displayController = (function() {
 
         let newTodoDueDate = document.createElement("div");
         newTodoDueDate.classList.add('self-center')
-        newTodoDueDate.innerText = "7 May"
+        newTodoDueDate.innerText = todo.getDueDate();
         newTodoContainer.appendChild(newTodoDueDate);
 
         let newTodoEditButton = document.createElement("button");

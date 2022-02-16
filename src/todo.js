@@ -4,26 +4,26 @@ const todo = (title, description, dueDate, priority, context) => {
     const getDescription = () => description;
     const getDueDate = () => dueDate;
     const getPriority = () => priority;
-    const getStatus = () => done;
-    const getContext = () => context;
-    return {getTitle, getDescription, getDueDate, getPriority, getStatus, getContext}
+
+    const setTitle = (newTitle) =>{
+        title = newTitle;
+    };
+
+    const setDescription = (newDescription) =>{
+        description = newDescription;
+    };
+
+    const setDueDate = (newDueDate) =>{
+        dueDate = newDueDate;
+    };
+
+    const setPriority = (newPriority) =>{
+        priority = newPriority;
+    };
+
+    return {getTitle, getDescription, getDueDate, getPriority, 
+            setTitle, setDescription, setDueDate, setPriority}
 }
-
-const todoList = (function(){
-    let list = [];
-
-    const addTodo = (todo) => {
-        list.push(todo);
-    }
-
-    const removeTodo = (index) => {
-        list.splice(index,1);
-    }
-
-    const getTodoList = () => list;
-
-    return {getTodoList, addTodo, removeTodo};
-})()
 
 const todoListCreate = (todoListName) => {
     let list = [];
@@ -44,4 +44,4 @@ const todoListCreate = (todoListName) => {
     return {getName, getTodoList, addTodo, removeTodo}
 }
 
-export {todo, todoList, todoListCreate};
+export {todo, todoListCreate};
