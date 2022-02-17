@@ -9,32 +9,31 @@
         <div id="nav" class="col-start-1 bg-cyan-600 grid grid-flow-row content-start justify-items-center">
             <div class="place-self-center text-5xl m-5 text-cyan-100">Stuff ToDo</div>
             <button id="addTodo" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 w-32">+</button>
-            <button id="inbox-label" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 w-32">Inbox</button>
-            <button id="newProject" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 mb-10 w-32">New Project</button>
-            <button id="project1" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 w-32">Project 1</button>
-            <button id="project2" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 w-32">Project 2</button>
+            <button id="inbox" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 w-32">Inbox</button>
+            <button id="newProjectButton" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 mb-10 w-32">New Project</button>
+            <button id="new" class="project-button bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full m-2 w-32">new</button>
 
         </div>
 
         <div class="col-start-2 grid bg-cyan-300 content-start text-cyan-100 font-bold">
             <div class="p-3 text-2xl bg-cyan-500 grid grid-flow-col justify-items-center justify-evenly">
-                <div id="contextLabel" class="self-center">Inbox</div>
+                <div id="projectLabel" class="self-center">Inbox</div>
             </div>
 
-            <div id="list" class=" grid grid-flow-row content-start rounded divide-y-2 divide-cyan-800">
+            <div id="list" class=" grid grid-flow-row content-start rounded divide-y-2 divide-cyan-200">
             </div>
         </div>
 
 
         <dialog id="todoDialog" class="bg-cyan-600 rounded">
             <form method="dialog">
-                <div class="grid grid-cols-2 grid-rows-4 gap-2">
+                <div class="grid grid-cols-2 grid-rows-[1fr_2fr_1fr_1fr] gap-2">
                     <label for="todoTitleInput" class="text-cyan-100 font-bold text-xl">Title:</label> 
-                    <input type="text" id="todoTitleInput" class="bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
+                    <input type="text" id="todoTitleInput" class="bg-cyan-500 font-bold appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
 
                     <label for="todoDescriptionInput" class="text-cyan-100 font-bold text-xl">Description: </label> 
-                    <input type="text" id="todoDescriptionInput" class="bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
-
+                    <textarea rows=3 id="todoDescriptionInput" class="resize-none bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200"></textarea>
+                    
                     <label for="todoDateInput" class="text-cyan-100 font-bold text-xl">Due Date: </label> 
                     <input type="date" id="todoDateInput" class="bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
 
@@ -47,27 +46,44 @@
         </dialog>
 
 
-          <dialog id="editTodoDialog">
-            <form method="dialog">
-              <p>
-                <input type="text" id="editTodoTitleInput">
-              </p>
-              <p>
-                <input type="text" id="editTodoDescriptionInput">
-              </p>
-              <p>
-                <label for="">Due Date</label> 
-                <input type="date" id="editTodoDateInput">
-              </p>
-  
-              <menu>
-                <button value="cancelEditButton">Cancel</button>
-                <button id="confirmEditButton" value="default">Confirm</button>
-              </menu>
-            </form>
-            <div id="indexOfTodo" class="hidden"></div>
-          </dialog>
-          
+        <dialog id="editTodoDialog" class="bg-cyan-600 rounded">
+          <form method="dialog">
+
+            <div class="grid grid-cols-2 grid-rows-[1fr_2fr_1fr_1fr] gap-2">
+              <label for="editTodoTitleInput" class="text-cyan-100 font-bold text-xl">Title:</label> 
+              <input type="text" id="editTodoTitleInput" class="bg-cyan-500 font-bold appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
+
+              <label for="editTodoDescriptionInput" class="text-cyan-100 font-bold text-xl">Description: </label> 
+              <textarea rows=3 id="editTodoDescriptionInput" class="resize-none bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200"></textarea>
+              
+              <label for="editTodoDateInput" class="text-cyan-100 font-bold text-xl">Due Date: </label> 
+              <input type="date" id="editTodoDateInput" class="bg-cyan-500 appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
+
+              <div class="col-span-2 flex justify-evenly">
+                  <button value="cancel" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full w-24">Cancel</button>
+                  <button id="confirmEditButton" value="default" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full w-24">Confirm</button>
+              </div>
+          </div>
+          </form> 
+          <div id="indexOfTodo" class="hidden"></div>
+        </dialog>
+
+        <dialog id="newProjectDialog" class="bg-cyan-600 rounded">
+          <form method="dialog">
+
+            <div class="grid grid-cols-2 grid-rows-2 gap-2">
+              <label for="newProjectInput" class="text-cyan-100 font-bold text-xl">Project:</label> 
+              <input type="text" id="newProjectInput" class="bg-cyan-500 font-bold appearance-none border-2 border-cyan-200 rounded w-full py-2 px-4 text-cyan-100 leading-tight focus:outline-none focus:bg-cyan-400 focus:border-cyan-200">
+
+              <div class="col-span-2 flex justify-evenly">
+                  <button value="cancel" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full w-24">Cancel</button>
+                  <button id="confirmNewProjectButton" value="default" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full w-24">Confirm</button>
+              </div>
+          </div>
+          </form>
+
+        </dialog>
+
     </div>
 </body>
 </html>

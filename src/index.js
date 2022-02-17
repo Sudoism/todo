@@ -1,4 +1,4 @@
-import {todo, todoListCreate} from './todo';
+import {todo, todoList, todoListArray} from './todo';
 import {displayController} from './display';
 import './style.css';
 
@@ -7,8 +7,8 @@ const controller = (function () {
     const confirmAddTodoButton = document.getElementById('confirmButton');
     const addTodoDialog = document.getElementById('todoDialog');
     const todoTitleInput = document.getElementById('todoTitleInput');
-    const todoDescriptionInput = document.getElementById('todoDescriptionInput')
-    const todoDateInput = document.getElementById('todoDateInput')
+    const todoDescriptionInput = document.getElementById('todoDescriptionInput');
+    const todoDateInput = document.getElementById('todoDateInput');
 
     const editTodoDialog = document.getElementById('editTodoDialog');
     const editTodoDialogTitle = document.getElementById('editTodoTitleInput');
@@ -18,7 +18,33 @@ const controller = (function () {
     const editConfirmDialog = document.getElementById('confirmEditButton');
     const editIndexDialog = document.getElementById('indexOfTodo');
 
-    
+    const newProjectDialog = document.getElementById('newProjectDialog');
+    const newProjectDialogInput = document.getElementById('newProjectInput');
+    const newProjectButton = document.getElementById('newProjectButton');
+    const newProjectConfirmButton = document.getElementById('confirmNewProjectButton');
+
+    const inboxButton = document.getElementById("inbox");
+
+    //Test entries ////////////////////////
+    const todoLists = todoListArray();
+    const inboxList = todoList("inbox");
+    const newList = todoList("new");
+    todoLists.addTodoList(inboxList);
+    todoLists.addTodoList(newList);
+
+    let currentTodoList = todoLists.getTodoLists()[1];
+
+    const newNote = todo("Project/context working", "A description again", "date", "high");
+    currentTodoList.addTodo(newNote);
+    const newNote2 = todo("Priority added", "A description once again again", "date", "high");
+    currentTodoList.addTodo(newNote2);
+    const newNote3 = todo("Local storage", "A description once again again", "date", "high");
+    currentTodoList.addTodo(newNote3);
+    const newNote4 = todo("Final tweak", "A description once again again", "date", "high");
+    currentTodoList.addTodo(newNote4);
+    addProjectLogic("new");
+
+    /// --------------
 
     //New Todo button logic
     addTodoButton.addEventListener('click', function onOpen() {
@@ -42,8 +68,9 @@ const controller = (function () {
 
     function renderTodoList() {
         displayController.updateTodoList(currentTodoList.getTodoList());
-        addDoneLogic()
-        addEditLogic()
+        displayController.updateProjectLabel(currentTodoList.getName());
+        addDoneLogic();
+        addEditLogic();
     }
 
     function addDoneLogic() {
@@ -67,10 +94,7 @@ const controller = (function () {
                     editTodoDialogDescription.value = currentTodoList.getTodoList()[i].getDescription();
                     editTodoDateDialog.value = currentTodoList.getTodoList()[i].getDueDate();
                     editIndexDialog.value = i;
-                    editTodoDialog.showModal(); //need closeModal? 
-                    //let note = todo("title", "A new description", "date", "high");
-                  //  todoList.addTodo(note);
-                   // displayController.addTodo(note);
+                    editTodoDialog.showModal();
                 } else {
                   alert("The <dialog> API is not supported by this browser");
                 }
@@ -89,25 +113,53 @@ const controller = (function () {
        renderTodoList();
     });
 
+    newProjectButton.addEventListener('click', function onOpen() {
+        if (typeof newProjectDialog.showModal === "function") {
+            newProjectDialog.showModal();
+        } else {
+          alert("The <dialog> API is not supported by this browser");
+        }
+    });
+
+    newProjectConfirmButton.addEventListener('click', () => {
+        displayController.addProject(newProjectDialogInput.value);
+        addProjectLogic(newProjectDialogInput.value);
+
+        let newTodoList = todoList(newProjectDialogInput.value);
+        todoLists.addTodoList(newTodoList);
+
+        newProjectDialogInput.value = '';
+    });
+
+    inboxButton.addEventListener('click', () => {
+        currentTodoList = todoLists.getTodoListByName("inbox");
+        renderTodoList();
+    });
+
+    function addProjectLogic(project) {
+        let elem = document.getElementById(project);
+        elem.addEventListener('click', (event) => {
+            currentTodoList = todoLists.getTodoListByName(event.target.id);
+            renderTodoList();
+        });
+    }
+
     return {renderTodoList}
 })();
 
-//Test entries
-const currentTodoList = todoListCreate("inbox")
 
-const newNote = todo("A title", "A description again", "date", "high");
-currentTodoList.addTodo(newNote);
-const newNote2 = todo("A second title", "A description once again again", "date", "high");
-currentTodoList.addTodo(newNote2);
-const newNote3 = todo("A second title", "A description once again again", "date", "high");
-currentTodoList.addTodo(newNote3);
-const newNote4 = todo("A forth title", "A description once again again", "date", "high");
-currentTodoList.addTodo(newNote4);
+//needs to be fixed! 
 
-//update page and make dynamic
-//displayController.updateTodoList(currentTodoList.getTodoList());
-//addDoneLogic();
+
+
+//currentTodoList = todoLists.getTodoLists()[0];
+
+
+
+//initiate page
 controller.renderTodoList();
+
+
 
 
 

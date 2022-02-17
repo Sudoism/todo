@@ -25,7 +25,7 @@ const todo = (title, description, dueDate, priority, context) => {
             setTitle, setDescription, setDueDate, setPriority}
 }
 
-const todoListCreate = (todoListName) => {
+const todoList = (todoListName) => {
     let list = [];
     let listName = todoListName;
 
@@ -44,4 +44,37 @@ const todoListCreate = (todoListName) => {
     return {getName, getTodoList, addTodo, removeTodo}
 }
 
-export {todo, todoListCreate};
+const todoListArray = () => {
+    let todoListArray = [];
+
+    const getTodoLists = () => todoListArray;
+
+    const addTodoList = (todoList) => {
+        todoListArray.push(todoList);
+    }
+
+    const removeTodoList = (index) => {
+        todoListArray.splice(index,1);
+    }
+
+    const getTodoListByName = (todoListName) => {
+        if(findTodoListByKey(todoListName) === "no match") {
+            return null;
+        } else {
+            return todoListArray[findTodoListByKey(todoListName)];
+        }
+    }
+
+    const findTodoListByKey = (key) => {
+        for (let i=0; i<todoListArray.length; i++) {
+            if (todoListArray[i].getName() === key) {
+                return i;
+            }
+        }
+        return "no match";
+    }
+
+    return {getTodoLists, addTodoList, removeTodoList, getTodoListByName}
+}
+
+export {todo, todoList, todoListArray};

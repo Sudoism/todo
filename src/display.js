@@ -1,12 +1,22 @@
 const displayController = (function() {
     const content = document.getElementById("content");
     const list = document.getElementById("list");
+    const nav = document.getElementById("nav");
+    const projectLabel = document.getElementById("projectLabel");
 
     function updateTodoList(todoList) {
         list.innerText ='';
         for(let i = 0; i < todoList.length; i++) {
             addTodo(todoList[i],i);
         }
+    }
+
+    function addProject(project) {
+        let newProjectButton = document.createElement("button");
+        newProjectButton.classList.add('overflow-hidden', 'bg-cyan-500', 'hover:bg-cyan-700', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded-full', 'm-2', 'w-32');
+        newProjectButton.id=project;
+        newProjectButton.innerHTML=project;
+        nav.appendChild(newProjectButton);
     }
 
     function addTodo(todo, id) {
@@ -37,7 +47,11 @@ const displayController = (function() {
         list.appendChild(newTodoContainer);
     }
 
-    return {addTodo, updateTodoList}
+    function updateProjectLabel(project) {
+        projectLabel.innerHTML = project;
+    }
+
+    return {addTodo, updateTodoList, addProject, updateProjectLabel}
 })()
 
 export {displayController}
