@@ -53,8 +53,8 @@ const todoListArray = () => {
         todoListArray.push(todoList);
     }
 
-    const removeTodoList = (index) => {
-        todoListArray.splice(index,1);
+    const removeTodoList = (todoListName) => {
+        todoListArray.splice(findTodoListByKey(todoListName),1);
     }
 
     const getTodoListByName = (todoListName) => {

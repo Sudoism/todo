@@ -19,6 +19,11 @@ const displayController = (function() {
         nav.appendChild(newProjectButton);
     }
 
+    function removeProject(project) {
+        let projectButton = document.getElementById(project);
+        nav.removeChild(projectButton);
+    }
+
     function addTodo(todo, id) {
         let newTodoContainer = document.createElement("div");
         newTodoContainer.classList.add('bg-cyan-400', 'grid', 'grid-flow-col', 'grid-cols-4');
@@ -51,7 +56,7 @@ const displayController = (function() {
         projectLabel.innerHTML = project;
     }
 
-    return {addTodo, updateTodoList, addProject, updateProjectLabel}
+    return {addTodo, updateTodoList, addProject, removeProject, updateProjectLabel}
 })()
 
 export {displayController}

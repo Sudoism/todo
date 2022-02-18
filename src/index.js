@@ -23,6 +23,9 @@ const controller = (function () {
     const newProjectButton = document.getElementById('newProjectButton');
     const newProjectConfirmButton = document.getElementById('confirmNewProjectButton');
 
+    const removeProjectButton = document.getElementById('remove-project-button');
+    const projectLabel = document.getElementById("projectLabel");
+
     const inboxButton = document.getElementById("inbox");
 
     //Test entries ////////////////////////
@@ -34,12 +37,10 @@ const controller = (function () {
 
     let currentTodoList = todoLists.getTodoLists()[1];
 
-    const newNote = todo("Project/context working", "A description again", "date", "high");
-    currentTodoList.addTodo(newNote);
-    const newNote2 = todo("Priority added", "A description once again again", "date", "high");
-    currentTodoList.addTodo(newNote2);
     const newNote3 = todo("Local storage", "A description once again again", "date", "high");
     currentTodoList.addTodo(newNote3);
+    const newNote2 = todo("Priority added", "A description once again again", "date", "high");
+    currentTodoList.addTodo(newNote2);
     const newNote4 = todo("Final tweak", "A description once again again", "date", "high");
     currentTodoList.addTodo(newNote4);
     addProjectLogic("new");
@@ -134,6 +135,19 @@ const controller = (function () {
     inboxButton.addEventListener('click', () => {
         currentTodoList = todoLists.getTodoListByName("inbox");
         renderTodoList();
+    });
+
+    removeProjectButton.addEventListener('click', ()=> {
+        //dont remove inbox project
+        if(projectLabel.innerHTML === "inbox"){
+            return;
+        } else {
+            displayController.removeProject(currentTodoList.getName());
+            todoLists.removeTodoList(currentTodoList.getName())
+            displayController.updateProjectLabel("inbox");
+            currentTodoList = todoLists.getTodoListByName("inbox");
+            renderTodoList();
+        }
     });
 
     function addProjectLogic(project) {

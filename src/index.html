@@ -16,8 +16,9 @@
         </div>
 
         <div class="col-start-2 grid bg-cyan-300 content-start text-cyan-100 font-bold">
-            <div class="p-3 text-2xl bg-cyan-500 grid grid-flow-col justify-items-center justify-evenly">
-                <div id="projectLabel" class="self-center">Inbox</div>
+            <div class="p-3 text-2xl bg-cyan-500 grid grid-cols-[4fr_1fr]">
+                <div id="projectLabel" class="self-center place-self-center">Inbox</div>
+                <button id="remove-project-button" class="place-self-end bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-full text-lg">X</button>
             </div>
 
             <div id="list" class=" grid grid-flow-row content-start rounded divide-y-2 divide-cyan-200">
