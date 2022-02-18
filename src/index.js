@@ -26,11 +26,11 @@ const controller = (function () {
     const removeProjectButton = document.getElementById('remove-project-button');
     const projectLabel = document.getElementById("projectLabel");
 
-    const inboxButton = document.getElementById("inbox");
+    const inboxButton = document.getElementById("Inbox");
 
     //Test entries ////////////////////////
     const todoLists = todoListArray();
-    const inboxList = todoList("inbox");
+    const inboxList = todoList("Inbox");
     const newList = todoList("new");
     todoLists.addTodoList(inboxList);
     todoLists.addTodoList(newList);
@@ -133,19 +133,19 @@ const controller = (function () {
     });
 
     inboxButton.addEventListener('click', () => {
-        currentTodoList = todoLists.getTodoListByName("inbox");
+        currentTodoList = todoLists.getTodoListByName("Inbox");
         renderTodoList();
     });
 
     removeProjectButton.addEventListener('click', ()=> {
         //dont remove inbox project
-        if(projectLabel.innerHTML === "inbox"){
+        if(projectLabel.innerHTML === "Inbox"){
             return;
         } else {
             displayController.removeProject(currentTodoList.getName());
             todoLists.removeTodoList(currentTodoList.getName())
-            displayController.updateProjectLabel("inbox");
-            currentTodoList = todoLists.getTodoListByName("inbox");
+            displayController.updateProjectLabel("Inbox");
+            currentTodoList = todoLists.getTodoListByName("Inbox");
             renderTodoList();
         }
     });
